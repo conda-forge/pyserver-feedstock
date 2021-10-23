@@ -22,6 +22,7 @@ requirements:
   run:
     - python >=2.7
     - pythonvirgotools
+    - pytango
 
 test:
   imports:
