@@ -1,5 +1,5 @@
 {% set name = "pyserver" %}
-{% set version = "1.0.2" %}
+{% set version = "1.1.2" %}
 
 package:
    name: "{{ name }}"
@@ -7,7 +7,7 @@ package:
 
 source:
    url: http://software.igwn.org/lscsoft/source/{{ name }}-{{ version }}.tar.gz
-   sha256: c51c626e8d99714e5be65b3f5e081dee84489df6749cfca76f419f3861e60539
+   sha256: 8e18efa85987c0ea86b6db57da58acdb81e687595c712d058ea5e014b8625165
 
 build:
   number: 0
@@ -22,6 +22,9 @@ requirements:
   run:
     - python >=2.7
     - pythonvirgotools
+    - pytango
+    - pyusb
+    - pymodbus
 
 test:
   imports:
