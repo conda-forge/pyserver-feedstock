@@ -1,0 +1,54 @@
+schema_version: 1
+
+context:
+  version: "1.1.2"
+  version_parts: ${{ version | split(".") }}
+  virgo_version: "v${{ version_parts[0] }}r${{ version_parts[1] }}p${{ version_parts[2] }}"
+
+package:
+  name: pyserver
+  version: ${{ version }}
+
+source:
+  url: https://git.ligo.org/virgo/virgoapp/pyserver/-/archive/${{ virgo_version }}/pyserver-${{ virgo_version }}.tar.gz
+  sha256: 64143d9dc839c4b80caf7b9d4031486f429c3c91a32db368e16246453d881363
+
+build:
+  noarch: python
+  number: 2
+  script: ${{ PYTHON }} -m pip install . -vvv
+
+requirements:
+  host:
+    - pip
+    - python ${{ python_min }}.*
+    - setuptools
+    - wheel
+  run:
+    - pymodbus
+    - pytango
+    - python >=${{ python_min }}
+    - pythonvirgotools
+    - pyusb
+
+tests:
+  - python:
+      imports:
+        - pyserver
+      pip_check: true
+      python_version:
+        - ${{ python_min }}.*
+        - "*"
+
+about:
+  summary: pyserver is a tool to run a custom python server that is fdio compliant
+  homepage: https://git.ligo.org/virgo/virgoapp/pyserver
+  repository: https://git.ligo.org/virgo/virgoapp/pyserver.git
+  license: GPL-2.0-or-later
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - duncanmmacleod
+    - erinelizabethseder-virgo
+    - fcarbogn
